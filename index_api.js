@@ -7,6 +7,8 @@ const bodyParser = require("body-parser");
 const authenapi = require('./authen/authen_api');
 const commonapi= require('./common/common_api');
 
+const AuthenUtil = require('./authen/AuthenUtil');
+
 //--------------------------------------------------
 
 //=============================================================
@@ -27,8 +29,13 @@ app.use('/common',commonapi);
 
 //--------------------------------------------------------------
 
-app.get("/",(req,res) => {
-    res.send({status:"welcome to our api"});
+app.get("/:token",(req,res) => {
+    
+    //const  u = new AuthenUtil();
+    AuthenUtil.checkToken(req.params.token,(r)=>{
+        res.send({status:r});
+    })
+
 });
 
 
