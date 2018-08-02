@@ -1,7 +1,7 @@
-var sql = require('mssql');
-var dbconfig = require('./sysconfig.js');
+const sql = require('mssql');
+const dbconfig = require('./sysconfig.js');
 
-var config = {
+const config = {
     server: dbconfig.sql_server,
     database: dbconfig.sql_database,
     user: dbconfig.sql_user,
@@ -11,9 +11,9 @@ var config = {
 
 function DBHelper(){
     this.Query = function(sqlstr,callback){
-        var con = new sql.Connection(config);
+        const con = new sql.Connection(config);
         con.connect().then(function () {
-            var request = new sql.Request(con);
+            const request = new sql.Request(con);
             request.query(sqlstr ,function (err, res){
                 con.close();
                 if (err) {
