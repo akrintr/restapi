@@ -14,9 +14,15 @@ function DBHelper(){
         var con = new sql.Connection(config);
         con.connect().then(function () {
             var request = new sql.Request(con);
-            request.query(sqlstr).then(function (recordSet) {
+            request.query(sqlstr ,function (err, res){
                 con.close();
-                callback(recordSet);
+                if (err) {
+                    console.log("Error while querying database :- " + err);
+                    callback({iserror:true,result: err});
+                   }
+                   else {
+                    callback({iserror:false,result:res});
+                          }
             });
         });
     }
