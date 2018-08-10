@@ -9,6 +9,9 @@ const commonapi= require('./common/common_api');
 
 const AuthenUtil = require('./authen/AuthenUtil');
 
+const empapi = require('./employee/emp_api');
+
+
 //--------------------------------------------------
 
 //=============================================================
@@ -27,6 +30,9 @@ app.use( (req, res, next) => {
 app.use('/authen', authenapi);
 app.use('/common',commonapi);
 
+app.use('/emp',empapi);
+
+
 //--------------------------------------------------------------
 
 app.get("/:token",(req,res) => {
@@ -36,6 +42,10 @@ app.get("/:token",(req,res) => {
         res.send({status:r});
     })
 
+});
+
+app.get("/",(req,res ) =>{
+    res.send({myname:"UPI"});
 });
 
 
